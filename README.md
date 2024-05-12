@@ -1,13 +1,17 @@
 Se crea repositorio con codigo Back/Front para fiducianara-Alianza
-Back: Java-SpringBoot - Lombok - PruebasUnitarias jUnit - JPA...
-Front: Angular - Angular Material....
+
+**Back: Java-SpringBoot - Lombok - PruebasUnitarias jUnit - JPA...**
+
+**Front: Angular - Angular Material....**
+
 Base de datos: H2
 
-#Ruta
+**Ruta**
 La ruta que esta alojada sera
 http://localhost:4200/#/parametrizacion/clientes
 
-#Funcionalides
+**Funcionalides**
+
 Se realiza buscador donde se debe ingresar Shared Key y posteriormente
 darle click en boton Advanced search para traer la informacion.
 
