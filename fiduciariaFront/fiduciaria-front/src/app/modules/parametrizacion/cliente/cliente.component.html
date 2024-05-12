@@ -1,0 +1,140 @@
+<!-- formulario-reactivo.component.html -->
+<div class="container">
+  <div>
+    <img src="assets/img/image.png" class="alianzaLogo">
+  </div>
+  <mat-card class="with140r">
+
+    <div class="main-cliente">
+
+      <div class="left-panel pading2r" >
+
+        <button mat-button class="button-left" [routerLink]="['/parametrizacion/clientes']" color="primary"
+          style="font-size: x-large;">
+          <mat-icon>person_pin</mat-icon>
+          Clients</button>
+        <button mat-button class="button-left" [routerLink]="['/parametrizacion/clientes']">Clients</button>
+        <button mat-button class="button-left" [routerLink]="['/inicio']">Client look history</button>
+        <button mat-button class="button-left" [routerLink]="['/property']">Emergency PIN configuration</button>
+        <button mat-button class="button-left" [routerLink]="['/usuarios']">Emergencu PIN history</button>
+      </div>
+
+      <div class="pading2r">
+        <div class="right-panel">
+
+          <button mat-flat-button color="primary" class="button-export" (click)="openModal()">+New</button>
+          <button mat-flat-button color="primary" class="button-export">
+            <mat-icon>archive</mat-icon>
+            Export</button>
+        </div>
+
+        <div class="right-panel buscadorCampo" >
+          <div class="search-bar">
+
+            <input type="text" [(ngModel)]="searchValue" class="buscador" matInput placeholder="Enter shared Key">
+
+            <!-- <input type="text" class="search" placeholder="¡Comienza a buscar tu plato favorito!" (keyup)="searchTerm$.next($event.target.value)"> -->
+          </div>
+          <button mat-flat-button color="primary" (click)="onClickAdvance()" class="button-export">Advanced
+            search</button>
+        </div>
+
+        <mat-card class="matCard">
+
+          <div class="margin2r" *ngIf="foundInf">
+            <form [formGroup]="formulario">
+              <div>
+                <label for="name">Name:</label>
+                <!-- <input type="text" id="name" formControlName="name"> -->
+                <mat-form-field appearance="outline" class="inputWith">
+                  <mat-label>Name</mat-label>
+                  <input matInput placeholder="Oscar Rodriguez" id="name" formControlName="businessId">
+                </mat-form-field>
+              </div>
+              <div>
+                <label for="phone">Phone:</label>
+                <mat-form-field appearance="outline" class="inputWith">
+                  <mat-label>Phone</mat-label>
+                  <input matInput placeholder="310777999" id="phone" formControlName="phone">
+                </mat-form-field>
+              </div>
+              <div>
+                <label for="email">E-mail:</label>
+                <mat-form-field appearance="outline" class="inputWith">
+                  <mat-label>email</mat-label>
+                  <input matInput placeholder="example@gmail.com" id="email" formControlName="email">
+                </mat-form-field>
+              </div>
+              <div>
+                <label for="start-date">Date:</label>
+                <input style="margin-left: 1rem; height: 5rem;" class="inputWith" type="date" id="start-date"
+                  formControlName="dataAdded">
+              </div>
+
+              <button style="margin: 1rem; float: right;" mat-flat-button color="primary" type="submit"
+                [disabled]="formulario.invalid">Submit</button>
+            </form>
+          </div>
+
+        </mat-card>
+
+        <div class="marginBotton">
+          <Label class="fondClientLabel">Clients</Label>
+        </div>
+        <div>
+          <table mat-table [dataSource]="clientsListView" class="mat-elevation-z8">
+
+
+            <!-- <ng-container matColumnDef="id">
+                          <th mat-header-cell *matHeaderCellDef> No. </th>
+                          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                        </ng-container> -->
+
+            <ng-container matColumnDef="sharedKey">
+              <th mat-header-cell *matHeaderCellDef> Shared Key </th>
+              <td mat-cell *matCellDef="let element"> {{element.sharedKey}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="businessId">
+              <th mat-header-cell *matHeaderCellDef> Business ID </th>
+              <td mat-cell *matCellDef="let element"> {{element.businessId}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef> E-mail </th>
+              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="phone">
+              <th mat-header-cell *matHeaderCellDef> Phone </th>
+              <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dataAdded">
+              <th mat-header-cell *matHeaderCellDef> Data Added </th>
+              <td mat-cell *matCellDef="let element"> {{element.dataAdded}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+              <th mat-header-cell *matHeaderCellDef> Edit </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-flat-button color="primary" class="button-export" (click)="editModal(element)">
+                  <mat-icon>border_color</mat-icon>
+                  Edit</button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+
+
+      </div>
+    </div>
+  </mat-card>
+
+
+</div>
