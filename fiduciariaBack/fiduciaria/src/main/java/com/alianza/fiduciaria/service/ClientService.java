@@ -1,6 +1,5 @@
 package com.alianza.fiduciaria.service;
 
-
 import com.alianza.fiduciaria.DTO.ClientDTO;
 import com.alianza.fiduciaria.model.ClientEntity;
 import com.alianza.fiduciaria.respository.ClientRepository;
@@ -15,94 +14,80 @@ import java.util.stream.Collectors;
 
 @Service
 public class ClientService {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(ClientService.class);
 
-    private final ClientRepository clientRepository;
+	private final ClientRepository clientRepository;
 
-    public ClientService(final ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
-    }
+	public ClientService(final ClientRepository clientRepository) {
+		this.clientRepository = clientRepository;
+	}
 
-    public List<ClientDTO> getAllClients() {
-    	logger.info("This is a debug message");
-         List<ClientEntity> clientEntities = this.clientRepository.findAll();
-         if (CollectionUtils.isEmpty(clientEntities)) {
-             throw new RuntimeException("There are not clients yet.");
-         }
+	public List<ClientDTO> getAllClients() {
+		logger.info("Ejecutando metodo getAllClients()");
+		List<ClientEntity> clientEntities = this.clientRepository.findAll();
+		if (CollectionUtils.isEmpty(clientEntities)) {
+			throw new RuntimeException("There are not clients yet.");
+		}
 
-        return clientEntities.stream().map(clientEntity -> new ClientDTO(clientEntity.getID(),
-                clientEntity.getSharedKey(),
-                clientEntity.getBusinessId(),
-                clientEntity.getEmail(),
-                clientEntity.getPhone(),
-                clientEntity.getDataAdded()
-                ))
-                .collect(Collectors.toList());
-    }
+		return clientEntities.stream()
+				.map(clientEntity -> new ClientDTO(clientEntity.getID(), clientEntity.getSharedKey(),
+						clientEntity.getBusinessId(), clientEntity.getEmail(), clientEntity.getPhone(),
+						clientEntity.getDataAdded()))
+				.collect(Collectors.toList());
+	}
 
+	public ClientDTO createStudent(final ClientDTO clientToCreate) {
+		ClientEntity clientEntity = ClientEntity.builder()
+				// .ID(clientToCreate.getID())
+				.sharedKey(clientToCreate.getSharedKey()).businessId(clientToCreate.getBusinessId())
+				.email(clientToCreate.getEmail()).phone(clientToCreate.getPhone())
+				.dataAdded(clientToCreate.getDataAdded()).build();
+		System.out.println("IDClienteCreate:" + clientToCreate.getID());
 
+		this.clientRepository.save(clientEntity);
 
-    public ClientDTO createStudent(final ClientDTO clientToCreate) {
-        ClientEntity clientEntity =  ClientEntity.builder()
-                //.ID(clientToCreate.getID())
-                .sharedKey(clientToCreate.getSharedKey())
-                .businessId(clientToCreate.getBusinessId())
-                .email(clientToCreate.getEmail())
-                .phone(clientToCreate.getPhone())
-                .dataAdded(clientToCreate.getDataAdded())
-                .build();
-        System.out.println("IDClienteCreate:"+clientToCreate.getID());
+		logger.info("cliente creado exitosamente!");
+		return clientToCreate;
+	}
 
-        this.clientRepository.save(clientEntity);
+	public ClientDTO updateStudent(final ClientDTO clientToUpdate) {
+		ClientEntity clientEntity = ClientEntity.builder().ID(clientToUpdate.getID())
+				.sharedKey(clientToUpdate.getSharedKey()).businessId(clientToUpdate.getBusinessId())
+				.email(clientToUpdate.getEmail()).phone(clientToUpdate.getPhone())
+				.dataAdded(clientToUpdate.getDataAdded()).build();
 
-        return clientToCreate;
-    }
+		System.out.println("IDClienteUpdate:" + clientToUpdate.getID());
 
-    public ClientDTO updateStudent(final ClientDTO clientToUpdate) {
-        ClientEntity clientEntity =  ClientEntity.builder()
-                .ID(clientToUpdate.getID())
-                .sharedKey(clientToUpdate.getSharedKey())
-                .businessId(clientToUpdate.getBusinessId())
-                .email(clientToUpdate.getEmail())
-                .phone(clientToUpdate.getPhone())
-                .dataAdded(clientToUpdate.getDataAdded())
-                .build();
+		this.clientRepository.save(clientEntity);
+		logger.info("cliente actualizado exitosamente!");
+		return clientToUpdate;
 
-        System.out.println("IDClienteUpdate:"+clientToUpdate.getID());
+	}
 
-        this.clientRepository.save(clientEntity);
-        return clientToUpdate;
+	public ClientDTO deleteStudent(final String ID) {
+		ClientEntity clientEntity = this.clientRepository.getReferenceById(ID);
+		if (clientEntity == null) {
+			throw new RuntimeException(String.format("Does not find the Client %s.", ID));
+		}
+		this.clientRepository.delete(clientEntity);
 
-    }
+		logger.info("cliente Eliminado exitosamente!");
 
-    public ClientDTO deleteStudent(final String ID) {
-        ClientEntity clientEntity = this.clientRepository.getReferenceById(ID);
-        if (clientEntity == null) {
-            throw new RuntimeException(String.format("Does not find the Client %s.", ID));
-        }
-        this.clientRepository.delete(clientEntity);
+		return new ClientDTO(clientEntity.getID(), clientEntity.getSharedKey(), clientEntity.getBusinessId(),
+				clientEntity.getEmail(), clientEntity.getPhone(), clientEntity.getDataAdded());
+	}
 
-        return new ClientDTO(clientEntity.getID(),
-                clientEntity.getSharedKey(),
-                clientEntity.getBusinessId(),
-                clientEntity.getEmail(),
-                clientEntity.getPhone(),
-                clientEntity.getDataAdded());
-    }
+	public ClientDTO getBySharedKey(String sharedKey) {
 
-    public ClientDTO getBySharedKey(String sharedKey) {
+		ClientEntity clientEntity = this.clientRepository.findBySharedKey(sharedKey);
+		if (clientEntity == null) {
+			logger.info("cliente no encontrado sharedKey:" + sharedKey);
+			throw new RuntimeException(String.format("Does not find the Client %s.", sharedKey));
+		}
 
-        ClientEntity clientEntity = this.clientRepository.findBySharedKey(sharedKey);
-        if (clientEntity == null) {
-            throw new RuntimeException(String.format("Does not find the Client %s.", sharedKey));
-        }
-
-        return new ClientDTO(clientEntity.getID(),
-                clientEntity.getSharedKey(),
-                clientEntity.getBusinessId(),
-                clientEntity.getEmail(),
-                clientEntity.getPhone(),
-                clientEntity.getDataAdded());
-    }
+		logger.info("cliente encontrado exitosamente!");
+		return new ClientDTO(clientEntity.getID(), clientEntity.getSharedKey(), clientEntity.getBusinessId(),
+				clientEntity.getEmail(), clientEntity.getPhone(), clientEntity.getDataAdded());
+	}
 }
