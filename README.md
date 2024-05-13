@@ -1,7 +1,7 @@
 # Se crea repositorio con codigo Back/Front para fiducianara-Alianza
 
 
-## **Back: Java-SpringBoot - Lombok - PruebasUnitarias jUnit - JPA...**
+## **Back: Java-SpringBoot - Lombok - PruebasUnitarias jUnit - JPA - LOGS ...**
 
 ## **Front: Angular - Angular Material....**
 
