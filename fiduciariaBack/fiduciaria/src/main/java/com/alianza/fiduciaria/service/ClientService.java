@@ -4,6 +4,9 @@ package com.alianza.fiduciaria.service;
 import com.alianza.fiduciaria.DTO.ClientDTO;
 import com.alianza.fiduciaria.model.ClientEntity;
 import com.alianza.fiduciaria.respository.ClientRepository;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -12,6 +15,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class ClientService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(ClientService.class);
 
     private final ClientRepository clientRepository;
 
@@ -20,6 +25,7 @@ public class ClientService {
     }
 
     public List<ClientDTO> getAllClients() {
+    	logger.info("This is a debug message");
          List<ClientEntity> clientEntities = this.clientRepository.findAll();
          if (CollectionUtils.isEmpty(clientEntities)) {
              throw new RuntimeException("There are not clients yet.");
