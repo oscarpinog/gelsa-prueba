@@ -1,0 +1,52 @@
+<div class="m8r">
+
+    <div class="titulo">
+        {{titulo}}
+    </div>
+    <mat-card>
+        <form [formGroup]="formularioCliente">
+            <div class="formularioDiv">
+
+                <div>
+                    <label for="cantidad">Cantidad:</label>
+                    <mat-form-field appearance="outline" class="inputWith">
+                        <mat-label>Cantidad</mat-label>
+                        <input matInput placeholder="310######" id="cantidad" formControlName="cantidad">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <label for="valor">Valor ven:</label>
+                    <mat-form-field appearance="outline" class="inputWith">
+                        <mat-label>Valor </mat-label>
+                        <input matInput placeholder="0000" id="valor" formControlName="valor">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <label for="operador">operador:</label>
+                    <mat-form-field appearance="outline" class="inputWith">
+                        <mat-label>operador</mat-label>
+                        <input matInput placeholder="Mov**" id="operador" formControlName="operador">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <label for="vendedor">vendedor:</label>
+                    <mat-form-field appearance="outline" class="inputWith">
+                        <mat-label>Vendedor</mat-label>
+                        <input matInput placeholder="example@hotmail.com" id="vendedor" formControlName="vendedor">
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <button class="cancelButton" mat-flat-button color="primary" (click)="closeModal()">CANCEL</button>
+                </div>
+                <div>
+                    <button class="saveButton" mat-flat-button color="primary" (click)="guardarCliente()"
+                        [disabled]="formularioCliente.invalid">SAVE</button>
+                </div>
+
+            </div>
+
+
+        </form>
+    </mat-card>
+</div>

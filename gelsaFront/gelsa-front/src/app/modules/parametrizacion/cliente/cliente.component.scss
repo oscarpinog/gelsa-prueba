@@ -1,0 +1,85 @@
+table {
+    width: 100%;
+  }
+  
+.left-panel{
+    display: flex;
+    flex-direction: column;
+    // height:50rem;
+
+}
+.right-panel{
+    display: flex;
+    flex-direction: row;
+    width: 100rem;
+    padding-bottom: 50px;
+}
+
+.container{
+    margin: 5rem;
+    // align-items: flex-start;
+}
+
+
+
+.main-cliente{
+    display: flex;
+    flex-direction: row;
+    // align-items: flex-start;
+    // align-content: flex-start;
+}
+.button-left{
+    margin: 1rem;
+    text-align: left;
+    justify-content: flex-start;
+}
+.button-export{
+    margin-left: 1rem;
+    text-align: left;
+    color: #1f96c1;
+    height: 4rem;
+
+}
+.direction-row{
+    display: flex;
+    flex-direction: row;
+    width: 25rem;
+
+}
+.buscador{
+    border-radius: 30px;
+    border: 2px solid #3a3b3a;
+    padding: 20px; 
+    width: 20rem;
+    height: 0.0rem;  
+}
+.inputWith{
+    width: 30rem;
+}
+.pading2r{
+    padding: 2rem;
+}
+.with140r{
+    width: 140rem;
+}
+.buscadorCampo{
+    margin-bottom: 2rem; margin-top: 2rem;
+}
+.alianzaLogo{
+    height: 5rem;
+    width: 15rem;
+}
+
+.matCard{
+    width: 45rem; margin-bottom: 2rem;
+}
+.margin2r{
+    margin: 2rem;
+}
+.marginBotton{
+    margin-bottom: 3rem;
+}
+.fondClientLabel{
+    font-size: large;
+    color: #1f96c1;
+}
